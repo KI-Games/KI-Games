@@ -4,119 +4,57 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>KI Games</title>
-    <style>
-        body {
-            text-align: center;
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 20px;
-            background-color: #f0f0f0;
-        }
-        .container {
-            position: relative;
-            display: inline-block;
-            margin: 0 auto;
-        }
-        .logo {
-            max-width: 100%;
-            height: auto;
-            display: block;
-        }
-        .thumbnail-container {
-            position: absolute;
-            bottom: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-        }
-        .thumbnail-wrapper {
-            text-align: center;
-        }
-        .thumbnail {
-            max-width: 150px;
-            height: auto;
-            border: 2px solid #333;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-        .caption {
-            margin-top: 5px;
-            font-size: 14px;
-            color: #fff;
-            text-shadow: 1px 1px 2px #000;
-        }
-        /* Lightbox styles */
-        .lightbox {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.8);
-            justify-content: center;
-            align-items: center;
-            z-index: 1000;
-        }
-        .lightbox img {
-            max-width: 90%;
-            max-height: 90%;
-            border: 5px solid #fff;
-            border-radius: 5px;
-        }
-        .lightbox.active {
-            display: flex;
-        }
-        .close-btn {
-            position: absolute;
-            top: 20px;
-            right: 30px;
-            color: #fff;
-            font-size: 40px;
-            cursor: pointer;
-        }
-    </style>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div class="container">
         <img src="images/KI_neo_small.jpg" alt="KI Games Logo" class="logo">
         <div class="thumbnail-container">
             <div class="thumbnail-wrapper">
-                <img src="images/ad_shoot.png" alt="KI Cars" class="thumbnail" onclick="openLightbox('images/ad_shoot.png')">
+                <img src="images/ad_shoot.png" alt="KI Cars" class="thumbnail" data-desc="My little entry into the GTA genre." onclick="openLightbox('images/ad_shoot.png', this.dataset.desc)">
                 <div class="caption">KI Cars</div>
             </div>
             <div class="thumbnail-wrapper">
-                <img src="images/tank.png" alt="KI Tanks" class="thumbnail" onclick="openLightbox('images/tank.png')">
+                <img src="images/tank.png" alt="KI Tanks" class="thumbnail" data-desc="In the honor of top-down (e.g. Metal Gear) style." onclick="openLightbox('images/tank.png', this.dataset.desc)">
                 <div class="caption">KI Tanks</div>
             </div>
             <div class="thumbnail-wrapper">
-                <img src="images/plane.png" alt="KI Tanks 2" class="thumbnail" onclick="openLightbox('images/plane.png')">
+                <img src="images/plane.png" alt="KI Tanks 2" class="thumbnail" data-desc="Multiple levels with different vehicles." onclick="openLightbox('images/plane.png', this.dataset.desc)">
                 <div class="caption">KI Tanks 2</div>
             </div>
             <div class="thumbnail-wrapper">
-                <img src="images/subs.png" alt="KI Subs" class="thumbnail" onclick="openLightbox('images/subs.png')">
+                <img src="images/subs.png" alt="KI Subs" class="thumbnail" data-desc="Sub and surface naval warfare with accoustic signature modeling." onclick="openLightbox('images/subs.png', this.dataset.desc)">
                 <div class="caption">KI Subs</div>
             </div>
             <div class="thumbnail-wrapper">
-                <img src="images/ai_adventure.png" alt="KI AI Adventure" class="thumbnail" onclick="openLightbox('images/ai_adventure.png')">
+                <img src="images/ai_adventure.png" alt="KI AI Adventure" class="thumbnail" data-desc="Multi-agent AI-driven text-based adventure game." onclick="openLightbox('images/ai_adventure.png', this.dataset.desc)">
                 <div class="caption">KI AI Adventure</div>
             </div>
         </div>
     </div>
 
+    <div class="company-description">
+        <p>In January of 2025 I had some spare time -- about 3 months.  So, I decided to prototype some game concepts I had been thinking about.
+        What you see here is the start of those prototypes.  Some of these are somewhat playable.  Some are very infant stages.  All were fun
+        little hobby projects that still need a lot of work to make my full vision come to life.</p>
+    </div>
+
     <!-- Lightbox -->
     <div class="lightbox" id="lightbox" onclick="closeLightbox()">
         <span class="close-btn" onclick="closeLightbox()">&times;</span>
-        <img id="lightbox-img" src="" alt="Enlarged Image">
+        <div class="lightbox-content">
+            <img id="lightbox-img" src="" alt="Enlarged Image">
+            <div id="lightbox-desc" class="lightbox-desc"></div>
+        </div>
     </div>
 
     <script>
-        function openLightbox(src) {
+        function openLightbox(src, desc) {
             const lightbox = document.getElementById('lightbox');
             const lightboxImg = document.getElementById('lightbox-img');
+            const lightboxDesc = document.getElementById('lightbox-desc');
             lightboxImg.src = src;
+            lightboxDesc.textContent = desc;
             lightbox.classList.add('active');
         }
 
